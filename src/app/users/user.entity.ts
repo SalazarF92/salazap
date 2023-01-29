@@ -1,5 +1,5 @@
 import { UserProps } from '@/types/interfaces';
-import { Base } from './base.entity';
+import { Base } from '../entities/base.entity';
 
 export class User extends Base {
   public props: UserProps;

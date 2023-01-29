@@ -1,5 +1,5 @@
 import { UpdateUserDto } from '@/app/users/dto/update-user.dto';
-import { User } from '@/app/users/entities/user.entity';
+import { User } from '@/app/users/user.entity';
 import { UserRepository } from '@/app/users/users.repository';
 
 export class InMemoryUserRepository implements UserRepository {

@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { UserRepository } from '@/app/users/users.repository';
 import { UpdateUserDto } from '@/app/users/dto/update-user.dto';
-import { User } from '@/app/users/entities/user.entity';
+import { User } from '@/app/users/user.entity';
 import { UserProps } from '@/types/interfaces';
 import { Replace } from '@/helpers/Replace';
 import { PrismaUserMapper } from '@/infra/mappers/prisma-user-mapper';

@@ -1,21 +1,23 @@
 import { DSN_RABBIT } from '@/settings';
+import { Injectable, OnModuleDestroy } from '@nestjs/common';
+import { ClientRMQ, ServerRMQ, Transport } from '@nestjs/microservices';
 import { Connection, Channel, connect } from 'amqplib';
 
-export class RabbitService {
-  private connection: Connection;
-  private channel: Channel;
-
-  public async initialize(): Promise<void> {
-    this.connection = await connect(DSN_RABBIT);
-    this.channel = await this.connection.createChannel();
-    console.log('RabbitService initialized');
+@Injectable()
+export class RabbitServiceConsumer
+  extends ServerRMQ
+  implements OnModuleDestroy
+{
+  constructor() {
+    super({
+      urls: [process.env.DSN_RABBIT],
+      queue: 'zaps1',
+      queueOptions: {
+        durable: false,
+      },
+    });
   }
-
-  public getConnection(): Connection {
-    return this.connection;
-  }
-
-  public getChannel(): Channel {
-    return this.channel;
+  async onModuleDestroy() {
+    this.close();
   }
 }

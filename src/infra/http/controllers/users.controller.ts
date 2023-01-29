@@ -11,7 +11,7 @@ import { UsersService } from '@/app/users/users.service';
 import { CreateUserDto } from '@/app/users/dto/create-user.dto';
 import { UpdateUserDto } from '@/app/users/dto/update-user.dto';
 import { HttpError } from '@/error/ErrorHandler';
-import { User } from '@/app/users/entities/user.entity';
+import { User } from '@/app/users/user.entity';
 
 @Controller('users')
 export class UsersController {

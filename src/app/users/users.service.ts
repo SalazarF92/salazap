@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { compareSync, hashSync } from 'bcrypt';
 import { UserRepository } from './users.repository';
 import { UserProps } from '@/types/interfaces';
-import { User } from './entities/user.entity';
+import { User } from './user.entity';
 import { HttpError } from '@/error/ErrorHandler';
 import { createSecretKey } from 'crypto';
 import { JWT_SECRET } from '@/settings';

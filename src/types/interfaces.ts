@@ -1,5 +1,3 @@
-import { Replace } from '@/helpers/Replace';
-
 export interface BaseProps {
   id: string;
   createdAt: Date;
@@ -7,6 +5,11 @@ export interface BaseProps {
   deletedAt: Date | null;
   deleted: boolean;
   active: boolean;
+}
+
+export interface MessageProps extends BaseProps {
+  content: string;
+  userId: string;
 }
 
 export interface UserProps extends BaseProps {

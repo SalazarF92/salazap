@@ -1,6 +1,6 @@
 import { InMemoryUserRepository } from 'test/repositories/in-memory-user-repository';
 import { UsersController } from '../../infra/http/controllers/users.controller';
-import { User } from './entities/user.entity';
+import { User } from './user.entity';
 import { UsersService } from './users.service';
 
 describe('UsersController', () => {

@@ -1,24 +1,21 @@
-import { DSN_RABBIT } from './settings';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 import { ValidationPipe } from './helpers/ValidationPipe';
+import { RabbitServiceConsumer } from './infra/queue/rabbitmq/rabbit.service';
 
 async function bootstrap() {
   const nest = NestFactory;
   const app = await nest.create(AppModule);
-  const rabbit = await nest.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.RMQ,
-    options: {
-      urls: [process.env.DSN_RABBIT],
-      queue: 'zaps',
-      queueOptions: {
-        durable: false,
-      },
-    },
-  });
-  await rabbit.listen().then(() => console.log('Microservice is listening'));
+
   app.useGlobalPipes(new ValidationPipe());
+  const rabbitConsumerService = app.get(RabbitServiceConsumer);
+  app.connectMicroservice<MicroserviceOptions>({
+    strategy: rabbitConsumerService,
+  });
+  await app.startAllMicroservices();
+  console.log('Microservice is listening...');
+
   await app.listen(3000);
 }
 bootstrap();
